@@ -1,0 +1,15 @@
+{
+  "name": "com.umbrason.umbrasonsutils",
+  "version": "1.0.0",
+  "displayName": "UmbrasonsUtils",
+  "description": "",
+  "keywords": [    
+  ],
+  "author": {
+    "name": "Umbrason"
+  },
+  "hideInEditor": false,
+  "dependencies": {
+    "com.unity.inputsystem": "1.0.0"
+  }
+}
