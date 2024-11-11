@@ -39,17 +39,23 @@ public class RotationSpring : ISpring<float>
 
     public void Step(float deltaTime)
     {
-        while (spring.RestingPos < 0)
-        {
-            spring.RestingPos += 360;
-            spring.Position += 360;
-        }
-        if (spring.RestingPos > 360)
-        {
-            spring.RestingPos -= 360;
-            spring.Position -= 360;
-        }
+        spring.Position = Mod360(spring.Position);
+        spring.RestingPos = ClosestAngleRepresentation(spring.RestingPos, spring.Position);
         spring.Step(deltaTime);
         OnSpringUpdated?.Invoke(spring.Position);
+    }
+
+    float ClosestAngleRepresentation(float angle, float other)
+    {
+        var deltaAngle = other - angle;
+        if (deltaAngle < -180) return angle - 360f;
+        if (deltaAngle > 180) return angle + 360f;
+        return angle;
+    }
+
+    float Mod360(float angle)
+    {
+        while (angle < 0) angle += 360;
+        return angle % 360;
     }
 }
